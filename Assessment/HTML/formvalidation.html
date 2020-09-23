@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function validate()
+        {
+            var name=document.getElementById("uname").value;
+            var password=document.getElementById("pass").value;
+            var phone=document.getElementById("phone").value;
+
+             // pattern=/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.[@#$%^&+=])/;
+
+               var pattern=/^(((?=.*[a-z])(?=.*[A-Z]))|((?=.*[a-z])(?=.*[0-9]))|((?=.*[A-Z])(?=.[0-9])))(?=.{6,})/;
+
+            if(name==""){
+                alert('username should not be blank');
+                document.getElementById("uname").focus();
+            }
+
+           else if(((name.length)<5) || ((name.length)>15))
+            {
+                alert('username should  be greater than 5 and less than 15');
+                document.getElementById("uname").focus();
+            }
+
+            else if(!password.match(pattern))
+                
+            {
+                alert("password must contain upper case, lower case, special character, number");
+                document.getElementById("pass").focus();
+            }
+
+            else if((isNaN(phone)) || ((phone.length)!=10))
+            {
+                alert('phone number should be a number');
+                document.getElementById("phone").focus();
+            }
+            else if(validateUserName())
+            {
+                document.getElementById("myform").submit();
+            }
+        }
+
+        function validateUserName(){
+            name=document.getElementById("uname").value;
+            var namelist=["angana","tom","ram"]
+
+            namelist.forEach( (ele) => {
+                   
+                   if(name==ele)
+                   {
+                       alert("User already exist!Enter valid username");
+                       return false;
+                   }
+                
+            });
+
+            return true;
+
+        }
+    </script>
+</head>
+<body>
+    <form action="Succes.html" id="myform">
+        Username: <input type="text" id="uname"><br>
+        Password: <input type="password" id="pass"><br>
+        Phone: <input type="text" id="phone"><br>
+        <input type="button" value="Register" onclick="validate()" ><br>
+    </form>
+</body>
+</html>
